@@ -16,11 +16,15 @@ In **SDN** environments, administrators require real-time packet monitoring to m
 
 ---
 
+## NetLockr at Work
+
+![NetLockr Screenshot](ss.png)
+
+---
+
 ## Architecture
 
 - **Network Simulation**: **Mininet** is used to create the SDN topology.
 - **Packet Sniffing**: A **Python socket-based sniffer** captures and analyzes traffic.
 - **SDN Controller**: **ONOS** handles security policies and flow control.
 - **REST API**: Communication between the sniffer and **ONOS** for real-time alerts and rule installation.
-
----
