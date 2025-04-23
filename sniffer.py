@@ -110,17 +110,34 @@ def log_detected_ip(suspicious_ip):
 # Packet callback function for sniffing
 from scapy.all import sniff
 
+from collections import defaultdict
+
+# Initialize a counter dictionary to track the frequency of IP addresses
+ip_counter = defaultdict(int)
+
 def packet_callback(packet):
     if packet.haslayer('IP'):
         src_ip = packet['IP'].src
         dst_ip = packet['IP'].dst
         print(f"Captured IP packet: {src_ip} -> {dst_ip}")
 
+        # Increment the count for this source IP
+        ip_counter[src_ip] += 1
+
+        # Check for the most frequent IP (i.e., the source IP with the highest count)
+        frequent_ip = max(ip_counter, key=ip_counter.get)
+        print(f"Most frequent IP: {frequent_ip} (appeared {ip_counter[frequent_ip]} times)")
+
         # Suspicious IP list or IP prefixes
         suspicious_ips = ["10.14.143.24", "10.14.142.129", "10.14.143.240"]
         suspicious_ranges = ["162.247.243.", "98.85.154."]
 
         if src_ip in suspicious_ips or any(src_ip.startswith(prefix) for prefix in suspicious_ranges):
+            alert_controller(src_ip)
+        
+        # You can also add an alert for the most frequent IP, if desired:
+        if src_ip == frequent_ip:
+            print(f"ALERT: Frequent packet source IP: {src_ip} (frequency: {ip_counter[src_ip]})")
             alert_controller(src_ip)
 
 # Start the packet sniffer
