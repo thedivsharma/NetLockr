@@ -18,7 +18,6 @@ In **SDN** environments, administrators require real-time packet monitoring to m
 
 ## NetLockr at Work
 
-<h3>NetLockr at Work</h3>
 <img src="./ss.png" width="60%" />
 
 ---
