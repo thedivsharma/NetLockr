@@ -25,6 +25,6 @@ In **SDN** environments, administrators require real-time packet monitoring to m
 ## Architecture
 
 - **Network Simulation**: **Mininet** is used to create the SDN topology.
-- **Packet Sniffing**: A **Python socket-based sniffer** captures and analyzes traffic.
+- **Packet Sniffing**: A custome made **Python socket-based sniffer** that captures and analyzes traffic.
 - **SDN Controller**: **ONOS** handles security policies and flow control.
 - **REST API**: Communication between the sniffer and **ONOS** for real-time alerts and rule installation.
